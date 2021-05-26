@@ -1,0 +1,44 @@
+.provider_active
+{
+
+}
+
+.provider_inactive
+{
+
+}
+
+.ocultar
+{
+    display: none !important;
+}
+
+.flotar_derecha
+{
+    float: right;
+}
+
+.flotar_izquierda
+{
+    float: left;
+}
+.clear
+{
+    clear: both;
+}
+
+.divSettingEditUserInfo
+{
+    width: 50% !important;
+}
+
+.divSettingEditUserInfo input
+{
+    float: right;
+}
+
+.imagenInicio img
+{
+    width: 90%;
+    height: 90%;
+}
