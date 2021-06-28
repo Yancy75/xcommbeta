@@ -30,16 +30,23 @@
 }
 .publico{
   background: white;
-  padding: 50px;
+  padding: 10px;
   text-transform: uppercase;
-  box-shadow: 0px 0px 2px black;
-  border-radius: 3px;
-/*forzando*/
-  /*min-height: 560px;*/
-  background-position: center;
-  background-size: contain;
-  background-repeat: no-repeat;
-  color: transparent;
+  box-shadow: 0px 0px 2px black; 
+}
+.publicidada{
+  background: black; 
+  color: white; 
+  padding: 15px; 
+  font-weight: 900;
+   border-radius: 5px; 
+   margin: 5px; 
+   max-width: 500px; 
+   min-width: 177px;
+   height: 120px; 
+   background-position: center;
+   background-size: cover;
+   cursor: pointer;
 }
 
 
@@ -48,14 +55,12 @@
 }*/
 </style>
 <section class="medio container-fluid">
-<div class="wow zoomIn  publico" id="publicidad1" data-wow-duration="0.5s" data-wow-delay="1.5s" style="background-image: url(http://www.sanjuanshoppingcenter.com/wp-content/uploads/2015/12/BHD-Leon.jpg);">publicidad 1</div>
+<!--<div class="wow zoomIn publico" id="publicidad1" data-wow-duration="0.5s" data-wow-delay="1.5s" >-->
+<div class="publico" id="publicidad1"  style="display: flex; justify-content: center; flex-wrap: wrap; background: linear-gradient(180deg, #c5c5c5, white);"> 
+</div>
   
-
 <div class="multiple pt-5">
-  <!--<div class="wow zoomIn caja publico" id="publicidad1" data-wow-duration="1s" data-wow-delay="1.5s" style="background-image: url(http://www.sanjuanshoppingcenter.com/wp-content/uploads/2015/12/BHD-Leon.jpg);">publicidad 1</div>
-  <div class="wow zoomIn caja publico" id="publicidad2" data-wow-duration="1s" data-wow-delay="1.7s" style="background-image: url(https://noticiasbancarias.com/wp-content/uploads/2014/01/Banco-Popular-Dominicano.jpg)">publicadad 2</div>
--->
-  <div class="wow zoomIn caja" data-wow-duration="1s" data-wow-delay="1s">
+   <div class="wow zoomIn caja" data-wow-duration="1s" data-wow-delay="1s">
        <h3 class="titulo1 wow zoomIn" data-wow-duration="1s" data-wow-delay="1s" >Tasas Públicas del Día</h3>
        <div class="bancos"></div>
   </div>
@@ -157,35 +162,48 @@
              <!-- /.card -->
            </div>
   </div><!-- medio -->
-  </div>
-  <div class="wow zoomIn  publico" id="publicidad2" data-wow-duration="0.5s" data-wow-delay="1.7s" style="background-image: url(https://noticiasbancarias.com/wp-content/uploads/2014/01/Banco-Popular-Dominicano.jpg)">publicadad 2</div>
+</div>
+
+<div class="wow zoomIn publico" id="publicidad2" data-wow-duration="0.5s" data-wow-delay="1.7s">
+  publicadad 2
+</div>
 </section>
 <script>
   $(function() {
+       jodete();     
       new WOW().init();
       $.ajax({url: "{{ route('tasagenerales') }}", type: 'GET', data: { data   : 'banco' }, dataType: 'JSON',
           success: function (d) {
             if(d.length > 0) {constructors(d, 'bancos'); temporizador(d.length);}},error: function(){} });
-
+      
       //Llama la funcion para mostrar el total de cada transaccion tanto en dolares como en euro
-
       setInterval(function(){ mostrarTotalTransaccionesDolarYEuro(); }, 10000);
 
+      $(".publicidada").click(function(){
+        var direccion=$(this).attr('alt');
+        window.open(direccion, 'Nombre Ventana');
+        alert(direccion);
+      });
   });/* final de inicio automatico */
 
+  
   function constructors(banco, clase){
       var p = ''
       var controlId = 0;
       $.each(banco, function(index, value){
           aux1=aleatorio(0,3);
           p += "<div id='b"+controlId+"' class='boni small-box bg-info' >";
-          /*p += "<div class='inner'><h3>"+value['banco']+"</h3><ul style='list-style: none;'><li>Venta Dolar: $"+value['venta_dolar']+" </li><li>Compra Dolar: $"+value['compra_dolar']+" </li><li>Venta Euro: $"+value['venta_euro']+" </li><li>Compra Euro: $"+value['compra_euro']+" </li></ul></div><div class='icon'><i class='fa fa-university'></i></div><a href='#' class='small-box-footer'>Mas informacion <i class='fa fa-arrow-circle-right'></i></a></div>";*/
           p += "<div class='inner'><h3><i class='fa fa-university'></i> "+value['banco']+"</h3><ul style='list-style: none;'><li>Venta Dolar: $"+value['venta_dolar']+" </li><li>Compra Dolar: $"+value['compra_dolar']+" </li><li>Venta Euro: $"+value['venta_euro']+" </li><li>Compra Euro: $"+value['compra_euro']+" </li></ul></div></div>";
           $("."+clase).append(p);
           controlId++;
       });
   }
-
+function jodete(){
+  var toma=3;
+        for(j=0; j < 10; j++){
+                $("#publicidad1").append('<div id="'+j+'" class="wow zoomIn publicidada" data-wow-duration="0.5s" data-wow-delay="0.'+j+'s" alt="https://www.w3schools.com" style="background-image: url(http://www.sanjuanshoppingcenter.com/wp-content/uploads/2015/12/BHD-Leon.jpg); "></div>');
+             }    
+  }
 function aleatorio(min, max) { return Math.floor(Math.random() * (max - min) + min);}
 function temporizador(num){for(i=0; i < num; i++){$("#b"+i).delay(300+(i*300)).fadeIn();}}
 </script>
