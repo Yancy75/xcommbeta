@@ -1,9 +1,8 @@
-@extends('layouts.appusuario')
-@section('style')
-    <link href="{{ asset('css/gijgo.min.css') }}" rel="stylesheet">
-@endsection
-@extends('layouts.componente.piebase')
-@section('content')
+<?php $__env->startSection('style'); ?>
+    <link href="<?php echo e(asset('css/gijgo.min.css')); ?>" rel="stylesheet">
+<?php $__env->stopSection(); ?>
+
+<?php $__env->startSection('content'); ?>
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-12">
@@ -11,14 +10,14 @@
                     <div class="card-header">Reporte Comisión</div>
 
                     <div class="card-body">
-                        <form class="form-inline" method="post" action=" {{ route('verReporteComision') }} ">
-                            @csrf
+                        <form class="form-inline" method="post" action=" <?php echo e(route('verReporteComision')); ?> ">
+                            <?php echo csrf_field(); ?>
                             <div class="col-auto my-1">
                                 <select class="custom-select mr-sm-2" name="id_banco" required>
                                     <option> Seleccione una entidad </option>
-                                    @foreach($info as $in)
-                                    <option value="{{$in->id}}"> {{ $in->name }}</option>
-                                    @endforeach
+                                    <?php $__currentLoopData = $info; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $in): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                    <option value="<?php echo e($in->id); ?>"> <?php echo e($in->name); ?></option>
+                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                 </select>
                             </div>
 
@@ -47,9 +46,9 @@
         </div>
     </div>
 
-@endsection
-@push('scripts')
-    <script src="{{ asset('js/gijgo.min.js') }}"></script>
+<?php $__env->stopSection(); ?>
+<?php $__env->startPush('scripts'); ?>
+    <script src="<?php echo e(asset('js/gijgo.min.js')); ?>"></script>
     <script>
         $( function() {
             $('#fecha_inicio').datepicker({
@@ -64,4 +63,7 @@
             });
         });
     </script>
-@endpush
+<?php $__env->stopPush(); ?>
+
+<?php echo $__env->make('layouts.componente.piebase', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+<?php echo $__env->make('layouts.appusuario', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\laragon\www\xcommbeta\resources\views/reporte/reporte_seleccionar_banco_fecha.blade.php ENDPATH**/ ?>

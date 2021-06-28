@@ -1,4 +1,7 @@
 @extends('layouts.appusuario')
+@section('style')
+    <link href="{{ asset('css/gijgo.min.css') }}" rel="stylesheet">
+@endsection
 @section('content')
 <div class="row justify-content-center">
         <div class="col-md-8">
@@ -15,46 +18,37 @@
                         <div class="input-group mb-3">
                             <label>nombre</label>
                             <input id="nombre" type="text" placeholder="{{ __('Nombre...') }}" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="text" autofocus /></br>
-                        </div>   
+                        </div>  
+                        <div class="input-group mb-3">
+                            <div class="custom-control custom-switch">
+                                   <input type="checkbox" class="custom-control-input" id="suiche1" value="click">
+                                   <label class="custom-control-label" for="suiche1">Por Cantidad de clicks</label>
+                             </div>
+                             <div class="custom-control custom-switch">
+                                   <input type="checkbox" class="custom-control-input" id="suiche2" value="fecha">
+                                   <label class="custom-control-label" for="suiche2">Por Tiempo</label>
+                             </div>
+                              
+                                                   
+                           
+                          </div>  
+                        <div class="input-group mb-3" id="click" style="display:none;">
+                            <label>Cantidad de Click</label>
+                            <input id="cantidad" type="number" class="form-control" name="cantidad" step="1" min="0"/></br>
+                        </div>  
+                        <div class="input-group mb-3" id="fecha" style="display:none;">
+                            <input id="fecha_inicio" type="text"  class="form-control" name="fechainicio"  />
+                            <input id="fecha_final" type="text"  class="form-control" name="fechainicio"   />
+                        </div>
+                        <div class="input-group mb-3">
+                            <label>nombre</label>
+                            <input id="nombre" type="text" placeholder="{{ __('Nombre...') }}" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="text" autofocus /></br>
+                        </div> 
 
                             <input type="file" />
                         </form>
 
-                     <!--   <form method="POST" action="{{ route('xcommlogin') }}">
-            @csrf
-          <div class="input-group mb-3">
-                  <input id="name" type="text" placeholder="{{ __('Usuario...') }}" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="text" autofocus>
-                          <div class="input-group-append">
-                                <div class="input-group-text"><span class="fas fa-pen-square"></span></div>
-                          </div>
-                          @error('name')
-                            <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
-                          @enderror
-          </div>
-          <div class="input-group mb-3">
-                <input id="password" type="password"  placeholder="{{ __('Clave...') }}" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
-                       <div class="input-group-append">
-                          <div class="input-group-text"><span class="fas fa-lock"></span></div>
-                        </div>
-                        @error('password')
-                          <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
-                        @enderror
-          </div>
-          <div class="form-group row">
-              <div class="col-8">
-                    <div class="icheck-primary">
-                        <input type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
-                        <label for="remember">{{ __('Recuérdame') }}</label>
-                    </div>
-              </div>
-            <div class="col-md-4"><button type="submit" class="btn btn-primary btn-block">{{ __('INICIO') }}</button></div>
-          </div>
-         <div class="form-group row mb-0">
-                @if (Route::has('password.request'))
-                  <a class="btn btn-link" href="{{ route('password.request') }}">{{ __('¿Olvidaste tu contraseña?') }}</a>
-                @endif
-         </div>
-      </form>-->
+              
 
 
                                   
@@ -62,8 +56,23 @@
             </div>
         </div>
     </div>
-
-
-    
-
 @endsection
+@push('scripts')
+    <script src="{{ asset('js/gijgo.min.js') }}"></script>
+    <script>
+        $( function() {
+            $('#fecha_inicio').datepicker({maxDate: function () {return $('#fecha_final').val();}});
+            $('#fecha_final').datepicker({minDate: function () {return $('#fecha_inicio').val();}});
+            
+            $("input[type='checkbox']").change(function(){
+                $("#"+$(this).val()).slideToggle(250);
+              /*if( $(this).is(':checked') ){
+                   $("#"+id).toggle();
+                   alert(" ha sido seleccionado "+$(this).val());
+                } else {
+                   alert(" ha sido deseleccionado "+$(this).val());
+                }*/
+            });
+        });
+    </script>
+@endpush

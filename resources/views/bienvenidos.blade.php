@@ -43,16 +43,12 @@
    margin: 5px; 
    max-width: 500px; 
    min-width: 177px;
-   height: 120px; 
+   min-height: 120px; 
    background-position: center;
    background-size: cover;
    cursor: pointer;
 }
 
-
-/*@media screen and (max-width: 1640px) {
-  #publicidad2{display:none;}
-}*/
 </style>
 <section class="medio container-fluid">
 <!--<div class="wow zoomIn publico" id="publicidad1" data-wow-duration="0.5s" data-wow-delay="1.5s" >-->
@@ -168,6 +164,7 @@
   publicadad 2
 </div>
 </section>
+
 <script>
   $(function() {
        jodete();     
@@ -179,11 +176,7 @@
       //Llama la funcion para mostrar el total de cada transaccion tanto en dolares como en euro
       setInterval(function(){ mostrarTotalTransaccionesDolarYEuro(); }, 10000);
 
-      $(".publicidada").click(function(){
-        var direccion=$(this).attr('alt');
-        window.open(direccion, 'Nombre Ventana');
-        alert(direccion);
-      });
+      $(".publicidada").click(function(){window.open($(this).attr('alt'));});
   });/* final de inicio automatico */
 
   
@@ -200,8 +193,8 @@
   }
 function jodete(){
   var toma=3;
-        for(j=0; j < 10; j++){
-                $("#publicidad1").append('<div id="'+j+'" class="wow zoomIn publicidada" data-wow-duration="0.5s" data-wow-delay="0.'+j+'s" alt="https://www.w3schools.com" style="background-image: url(http://www.sanjuanshoppingcenter.com/wp-content/uploads/2015/12/BHD-Leon.jpg); "></div>');
+        for(j=0; j < 5; j++){
+                $("#publicidad1").append('<div id="'+j+'" class="wow zoomIn publicidada" data-wow-duration="0.5s" title="hola" data-wow-delay="0.'+j+'s" alt="https://www.w3schools.com" style="background-image: url(http://www.sanjuanshoppingcenter.com/wp-content/uploads/2015/12/BHD-Leon.jpg); "></div>');
              }    
   }
 function aleatorio(min, max) { return Math.floor(Math.random() * (max - min) + min);}
